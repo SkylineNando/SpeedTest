@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teste de Velocidade da Internet</title>
+    <script src="speedtest.js"></script>
+</head>
+<body>
+    <h1>Teste de Velocidade da Internet</h1>
+    <button id="startButton">Iniciar Teste</button>
+    <div id="results" style="display: none;">
+        <h2>Resultados do Teste de Velocidade</h2>
+        <p>Velocidade de Download: <span id="downloadSpeed"></span> Mbps</p>
+        <p>Velocidade de Upload: <span id="uploadSpeed"></span> Mbps</p>
+        <p>Ping: <span id="ping"></span> ms</p>
+    </div>
+
+    <script>
+        document.getElementById("startButton").addEventListener("click", function() {
+            document.getElementById("startButton").disabled = true;
+            document.getElementById("results").style.display = "block";
+
+            performSpeedTest(function(data) {
+                document.getElementById("downloadSpeed").innerText = data.downloadSpeed.toFixed(2);
+                document.getElementById("uploadSpeed").innerText = data.uploadSpeed.toFixed(2);
+                document.getElementById("ping").innerText = data.ping;
+
+                document.getElementById("startButton").disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
